@@ -21,7 +21,7 @@ home_page <-
                 status = "primary",
                 img(id = "secant",
                     src = "secant.gif",
-                    width = "100%")
+                    width = "98%")
               )
             ))
             ,
@@ -44,6 +44,6 @@ home_page <-
                 status = "primary",
                 img(id = "fixedpoint",
                     src = "fixedpoint.gif",
-                    width = "100%")
+                    width = "75%")
               )
             )))
