@@ -1,4 +1,4 @@
-fixed_point_page <- fluidPage(
+bisection_page <- fluidPage(
   # Application title
   titlePanel("FixedPoint Algorithm"),
   br(),
@@ -6,8 +6,11 @@ fixed_point_page <- fluidPage(
   fluidRow(column(
     4,
     br(),
-    textInput("text_function_fixed", h3("Function Input(x)"),
-              placeholder = "Enter function..."),
+    textInput(
+      "text_function_bisection",
+      h3("Function Input(x)"),
+      placeholder = "Enter function..."
+    ),
     br()
   )),
   fluidRow(column(
@@ -15,7 +18,7 @@ fixed_point_page <- fluidPage(
     h3("Initial value"),
     br(),
     sliderInput(
-      'init_value_fixed',
+      'init_value_bisection',
       h4('Select the initial value'),
       min = 1,
       max = 120,
@@ -30,11 +33,9 @@ fixed_point_page <- fluidPage(
     8,
     h3("Output"),
     br(),
-    htmlOutput("root_method_solution_fixed"),
-    actionButton("calculate_button_fixed", "Calculate")
+    htmlOutput("root_method_solution_bisection"),
+    actionButton("calculate_button_bisection", "Calculate")
     
     
   ))
 )
-
-

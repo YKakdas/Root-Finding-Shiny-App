@@ -1,63 +1,37 @@
-dashboard <- function() {
-  library(shinydashboard)
-  
-  body <- dashboardBody(fluidRow(column(
-    10,
-    offset = 1,
-    box(
-      title = "Newton Ralphson",
-      width = 6,
-      height = "50%",
-      solidHeader = TRUE,
-      status = "primary",
-      img(
-        src = "newton.gif",
-        width = "100%"
-      )
-    ),
-    box(
-      title = "Secant",
-      width = 6,
-      height = "50%",
-      solidHeader = TRUE,
-      status = "primary",
-      img(
-        src = "secant.gif",
-        width = "100%"
-      )
-    )
-  ))
-  ,
-  fluidRow(column(
-    10,
-    offset = 1,
-    box(
-      title = "Bisection",
-      width = 6,
-      solidHeader = TRUE,
-      status = "primary",
-      img(
-        src = "bisection.gif",
-        width = "100%"
-      )
-    ),
-    box(
-      title = "Fixed Point",
-      width = 6,
-      solidHeader = TRUE,
-      status = "primary",
-      img(
-        src = "fixedpoint.gif",
-        width = "100%"
-      )
-    )
-  )))
-  
-  
-  # We'll save it in a variable `ui` so that we can preview it in the console
-  ui <- dashboardPage(
-    dashboardHeader(title = "Root Finding Algorithms"),
-    dashboardSidebar(disable = TRUE),
-    body
+source("pages/homepage.R", local = TRUE)
+source("pages/fixedpointpage.R", local = TRUE)
+source("pages/bisectionpage.R", local = TRUE)
+library(shinydashboard)
+
+sidebar <- dashboardSidebar(sidebarMenu(
+  menuItem("Home", tabName = "home", icon = icon("home")),
+  menuItem(
+    "Root Finding Algorithms",
+    tabName = "rootfinding",
+    menuSubItem("Newton", tabName = "newton"),
+    menuSubItem("Secant", tabName = "secant"),
+    menuSubItem("Bisection", tabName = "bisection"),
+    menuSubItem("Fixedpoint", tabName = "fixedpoint")
   )
-}
+  
+))
+
+body <- dashboardBody(tabItems(
+  tabItem(tabName = "home",
+          home_page),
+  
+  tabItem(tabName = "fixedpoint",
+          fixed_point_page),
+  
+  tabItem(tabName = "bisection",
+          bisection_page)
+))
+
+
+
+# We'll save it in a variable `ui` so that we can preview it in the console
+dashboard <-
+  dashboardPage(dashboardHeader(title = "Root Finding Algorithms"),
+                sidebar,
+                body)
+

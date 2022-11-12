@@ -1,4 +1,11 @@
-library(shiny)
-source("dashboard.R")
+source('dashboard.R', local = TRUE)
 
-shinyApp(ui = dashboard(), server = function(input, output) { })
+library(shiny)
+
+
+server <- function(input,output,session){
+  source('servers/fixedpointserver.R',local=TRUE)
+  source('servers/bisectionserver.R',local=TRUE)
+}
+
+shinyApp(ui = dashboard, server = server)
