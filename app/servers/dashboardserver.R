@@ -1,0 +1,4 @@
+shinyjs::onclick("newton",  updateTabItems(session, "tabs", "newton"))
+shinyjs::onclick("bisection",  updateTabItems(session, "tabs", "bisection"))
+shinyjs::onclick("secant",  updateTabItems(session, "tabs", "secant"))
+shinyjs::onclick("fixedpoint",  updateTabItems(session, "tabs", "fixedpoint"))

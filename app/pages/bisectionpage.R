@@ -1,6 +1,6 @@
 bisection_page <- fluidPage(
   # Application title
-  titlePanel("FixedPoint Algorithm"),
+  titlePanel("Bisection Algorithm"),
   br(),
   
   fluidRow(column(
@@ -35,7 +35,5 @@ bisection_page <- fluidPage(
     br(),
     htmlOutput("root_method_solution_bisection"),
     actionButton("calculate_button_bisection", "Calculate")
-    
-    
   ))
 )

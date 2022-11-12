@@ -4,10 +4,12 @@ source("pages/bisectionpage.R", local = TRUE)
 library(shinydashboard)
 
 sidebar <- dashboardSidebar(sidebarMenu(
+  id = "tabs",
   menuItem("Home", tabName = "home", icon = icon("home")),
   menuItem(
     "Root Finding Algorithms",
     tabName = "rootfinding",
+    startExpanded = TRUE,
     menuSubItem("Newton", tabName = "newton"),
     menuSubItem("Secant", tabName = "secant"),
     menuSubItem("Bisection", tabName = "bisection"),
@@ -28,8 +30,6 @@ body <- dashboardBody(tabItems(
 ))
 
 
-
-# We'll save it in a variable `ui` so that we can preview it in the console
 dashboard <-
   dashboardPage(dashboardHeader(title = "Root Finding Algorithms"),
                 sidebar,
