@@ -2,8 +2,8 @@ dashboard <- function() {
   library(shinydashboard)
   
   body <- dashboardBody(fluidRow(column(
-    8,
-    offset = 2,
+    10,
+    offset = 1,
     box(
       title = "Newton Ralphson",
       width = 6,
@@ -12,8 +12,7 @@ dashboard <- function() {
       status = "primary",
       img(
         src = "newton.gif",
-        width = "100%",
-        height = "100%"
+        width = "100%"
       )
     ),
     box(
@@ -24,37 +23,32 @@ dashboard <- function() {
       status = "primary",
       img(
         src = "secant.gif",
-        width = "100%",
-        height = "100%"
+        width = "100%"
       )
     )
   ))
   ,
   fluidRow(column(
-    8,
-    offset = 2,
+    10,
+    offset = 1,
     box(
       title = "Bisection",
       width = 6,
-      height = "50%",
       solidHeader = TRUE,
       status = "primary",
       img(
         src = "bisection.gif",
-        width = "100%",
-        height = "100%"
+        width = "100%"
       )
     ),
     box(
       title = "Fixed Point",
       width = 6,
-      height = "50%",
       solidHeader = TRUE,
       status = "primary",
       img(
         src = "fixedpoint.gif",
-        width = "100%",
-        height = "100%"
+        width = "100%"
       )
     )
   )))
