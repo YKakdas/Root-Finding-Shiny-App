@@ -1,8 +1,3 @@
-source("pages/homepage.R", local = TRUE)
-source("pages/fixedpointpage.R", local = TRUE)
-source("pages/bisectionpage.R", local = TRUE)
-library(shinydashboard)
-
 sidebar <- dashboardSidebar(sidebarMenu(
   id = "tabs",
   menuItem("Home", tabName = "home", icon = icon("home")),
