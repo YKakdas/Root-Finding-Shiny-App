@@ -1,6 +1,7 @@
 library(shiny)
 library(shinyjs)
 library(shinydashboard)
+library(spuRs)
 
 server <- function(input, output, session) {
   source('servers/fixedpointserver.R', local = TRUE)
