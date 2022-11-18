@@ -8,7 +8,9 @@ sidebar <- dashboardSidebar(sidebarMenu(
     menuSubItem("Newton", tabName = "newton"),
     menuSubItem("Secant", tabName = "secant"),
     menuSubItem("Bisection", tabName = "bisection"),
-    menuSubItem("Fixedpoint", tabName = "fixedpoint")
+    menuSubItem("Fixedpoint", tabName = "fixedpoint"),
+    menuSubItem("Regula Falsi", tabName = "regula"),
+    menuSubItem("Halley's Method", tabName = "halleys")
   )
   
 ))

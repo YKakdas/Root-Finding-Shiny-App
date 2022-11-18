@@ -46,4 +46,26 @@ home_page <-
                     src = "fixedpoint.gif",
                     width = "75%")
               )
+            )),
+            fluidRow(column(
+              10,
+              offset = 1,
+              box(
+                title = "Regula Falsi",
+                width = 6,
+                solidHeader = TRUE,
+                status = "primary",
+                img(id = "regula",
+                    src = "regula.gif",
+                    width = "84%")
+              ),
+              box(
+                title = "Halley's Method",
+                width = 6,
+                solidHeader = TRUE,
+                status = "primary",
+                img(id = "halleys",
+                    src = "halleys.gif",
+                    width = "100%")
+              )
             )))
