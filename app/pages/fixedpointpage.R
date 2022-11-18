@@ -1,4 +1,28 @@
+JS.logify <-
+  "
+// function to logify a sliderInput
+function logifySlider (sliderId) {
+    // scientific style
+    $('#'+sliderId).data('ionRangeSlider').update({
+      'prettify': function (num) { return ('10<sup>'+num+'</sup>'); }
+    })
+}"
+
+JS.onload <-
+  "
+// execute upon document loading
+$(document).ready(function() {
+  // wait a few ms to allow other scripts to execute
+  setTimeout(function() {
+    // include call for each slider
+    logifySlider('tolerance_value')
+  }, 5)})
+"
+
+
 fixed_point_page <- fluidPage(
+  tags$head(tags$script(HTML(JS.logify))),
+  tags$head(tags$script(HTML(JS.onload))),
   # Application title
   titlePanel("FixedPoint Algorithm"),
   br(),
@@ -49,11 +73,9 @@ fixed_point_page <- fluidPage(
     sliderInput(
       'tolerance_value',
       h4('Select the tolerance value'),
-      min = 1e-12,
-      max = 1e-2,
-      value = 1e-12,
-      step = 1e-12,
-      round = 0
+      min = -12,
+      max = -2,
+      value = -2
     ),
     br(),
     br(),
