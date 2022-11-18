@@ -1,19 +1,20 @@
-solution_fixed <- eventReactive(input$calculate_button_fixed,
+
+solution <- eventReactive(input$calculate_button,
                                 {
                                   ftn <- function(x) {
-                                    exp <- parse(text = as.character(input$text_function_fixed))
+                                    exp <- parse(text = as.character(input$text_function))
                                     return(eval(exp))
                                   }
                                   fun_result <-
-                                    fixedpoint(ftn, input$init_value_fixed)
+                                    fixedpoint(ftn, x0 = input$init_value, max.iter = input$max_iter_value, tol = input$tolerance_value)
                                   
                                 })
 
-output$root_method_solution_fixed <- renderUI({
-  result_fixed <- solution_fixed()
-  if (is.null(result_fixed)) {
-    result_fixed <- "Algorithm failed to converge!"
+output$root_method_solution <- renderUI({
+  result <- solution()
+  if (is.null(result)) {
+    result <- "Algorithm failed to converge!"
   }
-  h4("FixedPoint Algorithm Solution =", result_fixed)
+  h4("FixedPoint Algorithm Solution =", result)
   
 })
