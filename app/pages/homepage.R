@@ -64,7 +64,7 @@ home_page <-
                 width = 6,
                 solidHeader = TRUE,
                 status = "primary",
-                img(id = "halleys",
+                img(id = "halley",
                     src = "halleys.gif",
                     width = "100%")
               )
