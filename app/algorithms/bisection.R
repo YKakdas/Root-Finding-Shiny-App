@@ -1,53 +1,53 @@
-bisection <- function(ftn, x.l, x.r, tol = 1e-9) {
+bisection <- function(ftn, a, b, tol = 1e-9) {
   # applies the bisection algorithm to find x such that ftn(x) == 0
   # we assume that ftn is a function of a single variable
   #
-  # x.l and x.r must bracket the fixed point, that is
-  # x.l < x.r and ftn(x.l) * ftn(x.r) < 0
+  # a and b must bracket the fixed point, that is
+  # a < b and ftn(a) * ftn(b) < 0
   #
-  # the algorithm iteratively refines x.l and x.r and terminates when
-  # x.r - x.l <= tol
+  # the algorithm iteratively refines a and b and terminates when
+  # b - a <= tol
   
   # check inputs
-  if (x.l >= x.r) {
-    cat("error: x.l >= x.r \n")
+  if (a >= b) {
+    cat("error: a >= b \n")
     return(NULL)
   }
-  f.l <- ftn(x.l)
-  f.r <- ftn(x.r)
+  f.l <- ftn(a)
+  f.r <- ftn(b)
   if (f.l == 0) {
-    return(x.l)
+    return(a)
   } else if (f.r == 0) {
-    return(x.r)
+    return(b)
   } else if (f.l * f.r > 0) {
-    cat("error: ftn(x.l) * ftn(x.r) > 0 \n")
+    cat("error: ftn(a) * ftn(b) > 0 \n")
     return(NULL)
   }
   
-  # successively refine x.l and x.r
+  # successively refine a and b
   n <- 0
-  while ((x.r - x.l) > tol) {
-    x.m <- (x.l + x.r) / 2
+  while ((b - a) > tol) {
+    x.m <- (a + b) / 2
     f.m <- ftn(x.m)
     if (f.m == 0) {
       return(x.m)
     } else if (f.l * f.m < 0) {
-      x.r <- x.m
+      b <- x.m
       f.r <- f.m
     } else {
-      x.l <- x.m
+      a <- x.m
       f.l <- f.m
     }
     n <- n + 1
     cat("at iteration",
         n,
         "the root lies between",
-        x.l,
+        a,
         "and",
-        x.r,
+        b,
         "\n")
   }
   
   # return (approximate) root
-  return((x.l + x.r) / 2)
+  return((a + b) / 2)
 }

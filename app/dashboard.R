@@ -11,7 +11,7 @@ sidebar <- dashboardSidebar(sidebarMenu(
     menuSubItem("Fixedpoint", tabName = "fixedpoint"),
     menuSubItem("Regula Falsi", tabName = "regula"),
     menuSubItem("Halley's Method", tabName = "halley"),
-    menuSubItem("Don't click here!",tabName ="rei")
+    menuSubItem("Further Information",tabName ="rei")
   )
   
 ))
