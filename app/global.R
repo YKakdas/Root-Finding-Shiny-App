@@ -25,6 +25,7 @@ source("pages/newtonpage.R")
 source("pages/secantpage.R")
 source("pages/regulapage.R")
 source("pages/halleypage.R")
+source("pages/reipage.R")
 
 source('dashboard.R')
 

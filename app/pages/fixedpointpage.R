@@ -21,6 +21,7 @@ $(document).ready(function() {
 
 
 fixed_point_page <- fluidPage(
+  useShinyjs(),
   tags$head(tags$script(HTML(JS.logify))),
   tags$head(tags$script(HTML(JS.onload))),
   # Application title

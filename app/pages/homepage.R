@@ -68,4 +68,17 @@ home_page <-
                     src = "halleys.gif",
                     width = "100%")
               )
+            )),
+            fluidRow(column(10,
+                            offset = 3,
+              align="center",
+              box(
+                width = 6,
+                title = "More Algorithms",
+                solidHeader = TRUE,
+                status = "primary",
+                img(id = "rei",
+                    src = "rei.gif",
+                    width = "100%")
+              )
             )))

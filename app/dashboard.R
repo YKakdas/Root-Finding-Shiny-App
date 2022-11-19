@@ -10,7 +10,8 @@ sidebar <- dashboardSidebar(sidebarMenu(
     menuSubItem("Bisection", tabName = "bisection"),
     menuSubItem("Fixedpoint", tabName = "fixedpoint"),
     menuSubItem("Regula Falsi", tabName = "regula"),
-    menuSubItem("Halley's Method", tabName = "halley")
+    menuSubItem("Halley's Method", tabName = "halley"),
+    menuSubItem("Don't click here!",tabName ="rei")
   )
   
 ))
@@ -25,7 +26,8 @@ body <- dashboardBody(tabItems(
   
   tabItem(tabName = "bisection",
           bisection_page),
-  tabItem(tabName = "halley", halley_page)
+  tabItem(tabName = "halley", halley_page),
+  tabItem(tabName = "rei", rei_page)
 ))
 
 
