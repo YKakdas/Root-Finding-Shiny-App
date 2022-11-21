@@ -24,8 +24,13 @@ body <- dashboardBody(tabItems(
   tabItem(tabName = "fixedpoint",
           fixed_point_page),
   
+  tabItem(tabName = "newton",
+          newton_page),
+  
   tabItem(tabName = "bisection",
           bisection_page),
+  tabItem(tabName = "secant",
+          secant_page),
   tabItem(tabName = "halley", halley_page),
   tabItem(tabName = "rei", rei_page)
 ))

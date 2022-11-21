@@ -6,7 +6,7 @@ solution <- eventReactive(input$calculate_button,
                                     return(eval(exp))
                                   }
                                   fun_result <-
-                                    fixedpoint(ftn, x0 = input$init_value, max.iter = input$max_iter_value, tol = input$tolerance_value)
+                                    fixedpoint(ftn, x0 = input$init_value, max.iter = input$max_iter_value, tol = 10^input$tolerance_value)
                                   
                                 })
 

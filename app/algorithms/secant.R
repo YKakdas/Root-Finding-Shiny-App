@@ -37,9 +37,9 @@ secant_root_finding <-
           "The algorithm converged after ",
           iter,
           " iteration with error ",
-          abs(ftn(x_current)),
+          tol,
           ", and the root for the function is at x = ",
-          xnew
+          abs(ftn(x_current))
         )
       )
     }

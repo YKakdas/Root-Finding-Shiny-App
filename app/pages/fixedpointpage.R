@@ -26,7 +26,6 @@ fixed_point_page <- fluidPage(
   tags$head(tags$script(HTML(JS.onload))),
   # Application title
   titlePanel("FixedPoint Algorithm"),
-  br(),
   
   fluidRow(column(
     4,
@@ -49,7 +48,6 @@ fixed_point_page <- fluidPage(
       round = 0
     ),
     br(),
-    br(),
   )),
   fluidRow(column(
     4,
@@ -65,7 +63,6 @@ fixed_point_page <- fluidPage(
       round = 0
     ),
     br(),
-    br(),
   )),
   fluidRow(column(
     4,
@@ -76,9 +73,8 @@ fixed_point_page <- fluidPage(
       h4('Select the tolerance value'),
       min = -12,
       max = -2,
-      value = -2
+      value = -9
     ),
-    br(),
     br(),
   )),
   fluidRow(column(
