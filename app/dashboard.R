@@ -31,6 +31,8 @@ body <- dashboardBody(tabItems(
           bisection_page),
   tabItem(tabName = "secant",
           secant_page),
+  tabItem(tabName = "regula",
+          regula_page),
   tabItem(tabName = "halley", halley_page),
   tabItem(tabName = "rei", rei_page)
 ))
