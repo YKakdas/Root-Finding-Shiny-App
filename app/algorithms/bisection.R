@@ -52,7 +52,12 @@ bisection <- function(ftn, params) {
       x.m <- (a + b) / 2
       f.m <- ftn(x.m)
       if (f.m == 0) {
-        return(x.m)
+        return(list(
+          status = "SUCCESS",
+          root = x.m,
+          iteration = iter,
+          tolerance = 0
+        ))
       } else if (f.l * f.m < 0) {
         b <- x.m
         f.r <- f.m
@@ -61,13 +66,6 @@ bisection <- function(ftn, params) {
         f.l <- f.m
       }
       n <- n + 1
-      cat("at iteration",
-          n,
-          "the root lies between",
-          a,
-          "and",
-          b,
-          "\n")
       iter <- iter + 1
     }
     

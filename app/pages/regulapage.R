@@ -1,92 +1,43 @@
-JS.logify <-
-  "
-// function to logify a sliderInput
-function logifySlider (sliderId) {
-    // scientific style
-    $('#'+sliderId).data('ionRangeSlider').update({
-      'prettify': function (num) { return ('10<sup>'+num+'</sup>'); }
-    })
-}"
-
-JS.onload <-
-  "
-// execute upon document loading
-$(document).ready(function() {
-  // wait a few ms to allow other scripts to execute
-  setTimeout(function() {
-    // include call for each slider
-    logifySlider('tolerance_value8')
-  }, 5)})
-"
-
-
 regula_page <- fluidPage(
   useShinyjs(),
-  tags$head(tags$script(HTML(JS.logify))),
-  tags$head(tags$script(HTML(JS.onload))),
+  create_popup_window(
+    'regula_popup',
+    'regula_popup_plot',
+    'regula_download_plot',
+    'Regula'
+  ),
+  tags$head(tags$script(HTML(
+    regula_js_logify
+  ))),
+  tags$head(tags$script(HTML(
+    regula_js_onload
+  ))),
   # Application title
   titlePanel("Regula Algorithm"),
   
+  fluidRow(
+    column(
+      12,
+      create_box_for_function_text('regula_text_function',249),
+      create_box_for_multiple_initial_values('regula_init_value_start', 'regula_init_value_end')
+    )
+  ),
+  fluidRow(
+    column(
+      12,
+      create_box_for_max_iter('regula_max_iter_value'),
+      create_box_for_tolerance('regula_tolerance_value')
+    )
+  ),
   fluidRow(column(
-    4,
-    br(),
-    textInput("text8_function", h3("Function Input(x)"),
-              placeholder = "Enter function..."),
-    br()
+    12,
+    uiOutput('regula_solution'),
+    uiOutput('regula_plot')
   )),
   fluidRow(column(
-    4,
-    h3("Initial value 1(a)"),
-    br(),
-    sliderInput(
-      'init_value8',
-      h4('Select the initial value'),
-      min = 1,
-      max = 120,
-      value = 1,
-      step = 1,
-      round = 0
-    ),
-    br(),
-  )),
-  fluidRow(column(
-    4,
-    h3("Initial value 2(b)"),
-    br(),
-    sliderInput(
-      'second_init_value_8',
-      h4('Select the initial value'),
-      min = 1,
-      max = 120,
-      value = 1,
-      step = 1,
-      round = 0
-    ),
-    br(),
-  )),
-  fluidRow(column(
-    4,
-    h3("Tolerance"),
-    br(),
-    sliderInput(
-      'tolerance_value8',
-      h4('Select the tolerance value'),
-      min = -12,
-      max = -2,
-      value = -9
-    ),
-    br(),
-  )),
-  fluidRow(column(
-    8,
-    h3("Output"),
-    br(),
-    htmlOutput("regula_method_solution"),
-    actionButton("calculate8_button", "Calculate")
-    
-    
-  )),
+    12,
+    offset = 5,
+    create_action_button_for_calculation('regula_calculate_button')
+  ))
   
 )
-
-
