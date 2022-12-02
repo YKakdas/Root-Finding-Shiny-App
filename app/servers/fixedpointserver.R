@@ -33,7 +33,6 @@ observeEvent(input$fixedpoint_reset_button, {
   shinyjs::reset("fixedpoint_text_function")
   shinyjs::reset("fixedpoint_init_value")
   shinyjs::reset("fixedpoint_max_iter_value")
-  shinyjs::reset("fixedpoint_tolerance_value")
   shinyjs::hide("fixedpoint_solution_table")
   shinyjs::hide("fixedpoint_plot_render")
   
@@ -43,8 +42,6 @@ observeEvent(input$fixedpoint_reset_button, {
     root = NA,
     error = F
   )
-  
-  
 })
 
 

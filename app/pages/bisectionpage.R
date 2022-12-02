@@ -36,8 +36,9 @@ bisection_page <- fluidPage(
   )),
   fluidRow(column(
     12,
-    offset = 5,
-    create_action_button_for_calculation('bisection_calculate_button')
+    offset = 4,
+    create_action_button_for_calculation('bisection_calculate_button'),
+    create_action_button_for_reset('bisection_reset_button')
   ))
   
 )

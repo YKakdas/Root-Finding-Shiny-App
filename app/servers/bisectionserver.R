@@ -1,14 +1,16 @@
 shinyjs::onclick("bisection_plot_render",
                  pop_up_plot(session, "bisection_popup"))
 
-bisection_reactive_values <- reactiveValues(func = "",
-                                            status = F,
-                                            root = NA,
-                                            error = F)
+bisection_reactive_values <- reactiveValues(
+  func = "",
+  status = F,
+  root = NA,
+  error = F
+)
 
 bisection_wait_for_button_click <-
   eventReactive(input$bisection_calculate_button, {
-    # No action needed. Just used as a callback
+    bisection_reactive_values$error <- F
   })
 
 bisection_solution <-
@@ -27,9 +29,24 @@ bisection_solution <-
     )
   )
 
+observeEvent(input$bisection_reset_button, {
+  shinyjs::reset("bisection_text_function")
+  shinyjs::reset("bisection_init_value_start")
+  shinyjs::reset("bisection_init_value_end")
+  shinyjs::reset("bisection_max_iter_value")
+  shinyjs::hide("bisection_solution_table")
+  shinyjs::hide("bisection_plot_render")
+  
+  bisection_reactive_values <- reactiveValues(
+    func = "",
+    status = F,
+    root = NA,
+    error = F
+  )
+})
 
 output$bisection_solution_table <-
-  render_table(bisection_solution)
+  render_table(bisection_solution, bisection_reactive_values)
 
 output$bisection_solution <-
   output_root_finding_solution(

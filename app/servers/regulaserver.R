@@ -1,14 +1,33 @@
 shinyjs::onclick("regula_plot_render",
                  pop_up_plot(session, "regula_popup"))
 
-regula_reactive_values <- reactiveValues(func = "",
-                                            status = F,
-                                            root = NA)
+regula_reactive_values <- reactiveValues(
+  func = "",
+  status = F,
+  root = NA,
+  error = F
+)
 
 regula_wait_for_button_click <-
   eventReactive(input$regula_calculate_button, {
-    # No action needed. Just used as a callback
+    regula_reactive_values$error <- F
   })
+
+observeEvent(input$regula_reset_button, {
+  shinyjs::reset("regula_text_function")
+  shinyjs::reset("regula_init_value_start")
+  shinyjs::reset("regula_init_value_end")
+  shinyjs::reset("regula_max_iter_value")
+  shinyjs::hide("regula_solution_table")
+  shinyjs::hide("regula_plot_render")
+  
+  regula_reactive_values <- reactiveValues(
+    func = "",
+    status = F,
+    root = NA,
+    error = F
+  )
+})
 
 regula_solution <-
   eventReactive(
@@ -28,21 +47,17 @@ regula_solution <-
 
 
 output$regula_solution_table <-
-  render_table(regula_solution)
+  render_table(regula_solution, regula_reactive_values)
 
 output$regula_solution <-
-  output_root_finding_solution(
-    regula_wait_for_button_click,
-    regula_reactive_values,
-    'regula_solution_table'
-  )
+  output_root_finding_solution(regula_wait_for_button_click,
+                               regula_reactive_values,
+                               'regula_solution_table')
 
 output$regula_plot <-
-  output_plot(
-    regula_wait_for_button_click,
-    regula_reactive_values,
-    'regula_plot_render'
-  )
+  output_plot(regula_wait_for_button_click,
+              regula_reactive_values,
+              'regula_plot_render')
 
 output$regula_plot_render <-
   render_plot(regula_reactive_values)
