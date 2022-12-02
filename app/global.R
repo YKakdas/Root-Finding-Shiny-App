@@ -12,6 +12,7 @@ library(spuRs)
 library(shinyBS)
 
 source("server_util.R")
+source("ui_util.R")
 
 server <- function(input, output, session) {
   source('servers/fixedpointserver.R', local = TRUE)

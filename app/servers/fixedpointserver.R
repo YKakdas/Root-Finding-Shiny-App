@@ -31,7 +31,7 @@ output$fixedpoint_solution <-
 output$fixedpoint_plot <-
   output_plot(wait_for_button_click, values, 'fixedpoint_plot_render')
 output$fixedpoint_plot_render <- render_plot(values)
-output$popup_plot <- render_plot(values)
+output$fixedpoint_popup_plot <- render_plot(values)
 output$fixedpoint_download_plot <-
   get_download_handler("fixedpoint_plot.png", values)
 
