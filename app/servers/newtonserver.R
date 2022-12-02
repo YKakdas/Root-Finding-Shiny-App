@@ -1,26 +1,50 @@
+shinyjs::onclick("newton_plot_render",
+                 pop_up_plot(session, "newton_popup"))
 
-solution2 <- eventReactive(input$calculate2_button,
-                          {
-                            ftn2 <- function(x) {
-                              exp <- parse(text = as.character(input$text2_function))
-                              fx <- eval(exp)
-                              first_derivative <- D(exp,"x")
-                              #second_derivative <- D(first_derivative,"x")
-                              fdx <- eval(first_derivative)
-                              #fddx <- eval(second_derivative)
-                              return(c(fx,fdx))
-                            }
-                            
-                            fun_result2 <-
-                              newtonraphson(ftn2, x0 = input$init_value2, max.iter = input$max_iter_value2, tol = 10^input$tolerance_value2)
-                            
-                          })
+newton_reactive_values <- reactiveValues(func = "",
+                                         status = F,
+                                         root = NA)
 
-output$newton_method_solution <- renderUI({
-  result2 <- solution2()
-  if (is.null(result2)) {
-    result2 <- "Algorithm failed to converge!"
-  }
-  h4("Newton's Algorithm Solution =", result2)
-  
-})
+newton_wait_for_button_click <-
+  eventReactive(input$newton_calculate_button, {
+    # No action needed. Just used as a callback
+  })
+
+newton_solution <-
+  eventReactive(
+    input$newton_calculate_button,
+    calculate_root_finding(
+      input$newton_text_function,
+      newton,
+      c(
+        x0 = as.numeric(input$newton_init_value),
+        max.iter = input$newton_max_iter_value,
+        tol = 10 ^ input$newton_tolerance_value
+      ),
+      newton_reactive_values,
+      is_newton = T
+    )
+  )
+
+
+output$newton_solution_table <-
+  render_table(newton_solution)
+
+output$newton_solution <-
+  output_root_finding_solution(newton_wait_for_button_click,
+                               newton_reactive_values,
+                               'newton_solution_table')
+
+output$newton_plot <-
+  output_plot(newton_wait_for_button_click,
+              newton_reactive_values,
+              'newton_plot_render')
+
+output$newton_plot_render <-
+  render_plot(newton_reactive_values)
+
+output$newton_popup_plot <-
+  render_plot(newton_reactive_values)
+
+output$newton_download_plot <-
+  get_download_handler("newton_plot.png", newton_reactive_values)

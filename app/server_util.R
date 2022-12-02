@@ -8,6 +8,7 @@ createTableSuccess <- function(result) {
   )
   df$error <- format(df$error, scientific = TRUE)
   df
+  print(df)
 }
 
 createTableFailure <- function(result) {
@@ -25,10 +26,23 @@ calculate_root_finding <-
   function(input_func,
            root_finding_method,
            params,
-           values) {
-    ftn <- function(x) {
-      exp <- parse(text = as.character(input_func))
-      return(eval(exp))
+           values,
+           is_newton = F) {
+    if (is_newton) {
+      ftn <- function(x) {
+        exp <- parse(text = as.character(input_func))
+        fx <- eval(exp)
+        
+        first_derivative <- D(exp, "x")
+        fdx <- eval(first_derivative)
+        
+        return(c(fx, fdx))
+      }
+    } else{
+      ftn <- function(x) {
+        exp <- parse(text = as.character(input_func))
+        return(eval(exp))
+      }
     }
     
     fun_result <-

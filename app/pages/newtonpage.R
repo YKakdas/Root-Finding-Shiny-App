@@ -1,92 +1,43 @@
-JS.logify <-
-  "
-// function to logify a sliderInput
-function logifySlider (sliderId) {
-    // scientific style
-    $('#'+sliderId).data('ionRangeSlider').update({
-      'prettify': function (num) { return ('10<sup>'+num+'</sup>'); }
-    })
-}"
-
-JS.onload <-
-  "
-// execute upon document loading
-$(document).ready(function() {
-  // wait a few ms to allow other scripts to execute
-  setTimeout(function() {
-    // include call for each slider
-    logifySlider('tolerance_value2')
-  }, 5)})
-"
-
-
 newton_page <- fluidPage(
   useShinyjs(),
-  tags$head(tags$script(HTML(JS.logify))),
-  tags$head(tags$script(HTML(JS.onload))),
+  create_popup_window(
+    'newton_popup',
+    'newton_popup_plot',
+    'newton_download_plot',
+    'Newton'
+  ),
+  tags$head(tags$script(HTML(
+    newton_js_logify
+  ))),
+  tags$head(tags$script(HTML(
+    newton_js_onload
+  ))),
   # Application title
-  titlePanel("Newton's Algorithm"),
+  titlePanel("Newton Algorithm"),
   
+  fluidRow(
+    column(
+      12,
+      create_box_for_function_text('newton_text_function',173),
+      create_box_for_single_initial_value('newton_init_value')
+    )
+  ),
+  fluidRow(
+    column(
+      12,
+      create_box_for_max_iter('newton_max_iter_value'),
+      create_box_for_tolerance('newton_tolerance_value')
+    )
+  ),
   fluidRow(column(
-    4,
-    br(),
-    textInput("text2_function", h3("Function Input(x)"),
-              placeholder = "Enter function..."),
-    br()
+    12,
+    uiOutput('newton_solution'),
+    uiOutput('newton_plot')
   )),
   fluidRow(column(
-    4,
-    h3("Initial value"),
-    br(),
-    sliderInput(
-      'init_value2',
-      h4('Select the initial value'),
-      min = 1,
-      max = 120,
-      value = 1,
-      step = 1,
-      round = 0
-    ),
-    br(),
-  )),
-  fluidRow(column(
-    4,
-    h3("Max Iteration"),
-    br(),
-    sliderInput(
-      'max_iter_value2',
-      h4('Select the max iteration value'),
-      min = 100,
-      max = 1000,
-      value = 100,
-      step = 1,
-      round = 0
-    ),
-    br(),
-  )),
-  fluidRow(column(
-    4,
-    h3("Tolerance"),
-    br(),
-    sliderInput(
-      'tolerance_value2',
-      h4('Select the tolerance value'),
-      min = -12,
-      max = -2,
-      value = -9
-    ),
-    br(),
-  )),
-  fluidRow(column(
-    8,
-    h3("Output"),
-    br(),
-    htmlOutput("newton_method_solution"),
-    actionButton("calculate2_button", "Calculate")
-    
-    
-  )),
+    12,
+    offset = 5,
+    create_action_button_for_calculation('newton_calculate_button')
+  ))
   
 )
-
-
