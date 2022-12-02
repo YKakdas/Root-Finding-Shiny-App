@@ -1,8 +1,8 @@
-create_box_for_function_text <- function(text_input_id) {
+create_box_for_function_text <- function(text_input_id, height) {
   box(
     title = "Function",
     width = 6,
-    height = "50%",
+    height = height,
     solidHeader = TRUE,
     status = "primary",
     textInput(text_input_id, h3("Function Input(x)"),

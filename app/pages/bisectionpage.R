@@ -18,7 +18,7 @@ bisection_page <- fluidPage(
   fluidRow(
     column(
       12,
-      create_box_for_function_text('bisection_text_function'),
+      create_box_for_function_text('bisection_text_function',249),
       create_box_for_multiple_initial_values('bisection_init_value_start', 'bisection_init_value_end')
     )
   ),
