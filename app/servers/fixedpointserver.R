@@ -1,20 +1,41 @@
+shinyjs::onclick("fixedpoint_plot_render",  pop_up_plot())
 
-solution <- eventReactive(input$calculate_button,
-                                {
-                                  ftn <- function(x) {
-                                    exp <- parse(text = as.character(input$text_function))
-                                    return(eval(exp))
-                                  }
-                                  fun_result <-
-                                    fixedpoint(ftn, x0 = input$init_value, max.iter = input$max_iter_value, tol = 10^input$tolerance_value)
-                                  
-                                })
+values <- reactiveValues(func = "",
+                         status = T,
+                         root = NA)
 
-output$root_method_solution <- renderUI({
-  result <- solution()
-  if (is.null(result)) {
-    result <- "Algorithm failed to converge!"
-  }
-  h4("FixedPoint Algorithm Solution =", result)
-  
-})
+wait_for_button_click <-
+  eventReactive(input$fixedpoint_calculate_button, {
+    # No action needed. Just used as a callback
+  })
+
+solution <-
+  eventReactive(
+    input$fixedpoint_calculate_button,
+    calculate_root_finding(
+      input$fixedpoint_text_function,
+      fixedpoint,
+      c(
+        x0 = as.numeric(input$fixedpoint_init_value),
+        max.iter = input$fixedpoint_max_iter_value,
+        tol = 10 ^ input$fixedpoint_tolerance_value
+      ),
+      values
+    )
+  )
+
+
+output$fixedpoint_solution_table <- render_table(solution)
+output$fixedpoint_solution <-
+  output_root_finding_solution(wait_for_button_click, values, 'fixedpoint_solution_table')
+output$fixedpoint_plot <-
+  output_plot(wait_for_button_click, values, 'fixedpoint_plot_render')
+output$fixedpoint_plot_render <- render_plot(values)
+output$popup_plot <- render_plot(values)
+output$fixedpoint_download_plot <-
+  get_download_handler("fixedpoint_plot.png", values)
+
+
+pop_up_plot <- function() {
+  toggleModal(session, "fixedpoint_popup", toggle = "open")
+}

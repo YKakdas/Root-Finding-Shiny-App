@@ -1,11 +1,17 @@
-list.of.packages <- c("shiny", "shinyjs","shinydashboard","spuRs")
-new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) install.packages(new.packages)
+list.of.packages <-
+  c("shiny", "shinyjs", "shinydashboard", "spuRs", "systemfonts", "shinyBS")
+new.packages <-
+  list.of.packages[!(list.of.packages %in% installed.packages()[, "Package"])]
+if (length(new.packages))
+  install.packages(new.packages)
 
 library(shiny)
 library(shinyjs)
 library(shinydashboard)
 library(spuRs)
+library(shinyBS)
+
+source("server_util.R")
 
 server <- function(input, output, session) {
   source('servers/fixedpointserver.R', local = TRUE)

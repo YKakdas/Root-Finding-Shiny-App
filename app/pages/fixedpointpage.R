@@ -15,78 +15,84 @@ $(document).ready(function() {
   // wait a few ms to allow other scripts to execute
   setTimeout(function() {
     // include call for each slider
-    logifySlider('tolerance_value')
+    logifySlider('fixedpoint_tolerance_value')
   }, 5)})
 "
 
 
 fixed_point_page <- fluidPage(
   useShinyjs(),
+  mainPanel(
+    bsModal("fixedpoint_popup", "Fixedpoint Plot", "NONE", size = "large",plotOutput("popup_plot"),downloadButton('fixedpoint_download_plot', 'Download'))
+  ),
   tags$head(tags$script(HTML(JS.logify))),
   tags$head(tags$script(HTML(JS.onload))),
   # Application title
   titlePanel("FixedPoint Algorithm"),
   
   fluidRow(column(
-    4,
-    br(),
-    textInput("text_function", h3("Function Input(x)"),
-              placeholder = "Enter function..."),
-    br()
-  )),
-  fluidRow(column(
-    4,
-    h3("Initial value"),
-    br(),
-    sliderInput(
-      'init_value',
-      h4('Select the initial value'),
-      min = 1,
-      max = 120,
-      value = 1,
-      step = 1,
-      round = 0
+    12,
+    box(
+      title = "Function",
+      width = 6,
+      height = "50%",
+      solidHeader = TRUE,
+      status = "primary",
+      textInput("fixedpoint_text_function", h3("Function Input(x)"),
+                placeholder = "Enter function..."),
     ),
-    br(),
+    box(
+      title = "Initial Value",
+      width = 6,
+      height = "50%",
+      solidHeader = TRUE,
+      status = "primary",
+      textInput("fixedpoint_init_value", h3("Initial Value"),
+                placeholder = "Enter initial value...")
+      
+    )
   )),
   fluidRow(column(
-    4,
-    h3("Max Iteration"),
-    br(),
-    sliderInput(
-      'max_iter_value',
-      h4('Select the max iteration value'),
-      min = 100,
-      max = 1000,
-      value = 100,
-      step = 1,
-      round = 0
+    12,
+    box(
+      title = "Number of Maximum Iterations",
+      width = 6,
+      height = "50%",
+      solidHeader = TRUE,
+      status = "primary",
+      sliderInput(
+        'fixedpoint_max_iter_value',
+        h4('Select the max iteration value'),
+        min = 100,
+        max = 1000,
+        value = 100,
+        step = 1,
+        round = 0
+      )
     ),
-    br(),
+    box(
+      title = "Tolerance",
+      width = 6,
+      height = "50%",
+      solidHeader = TRUE,
+      status = "primary",
+      sliderInput(
+        'fixedpoint_tolerance_value',
+        h4('Select the tolerance value'),
+        min = -12,
+        max = -6,
+        value = -9
+      )
+    )
   )),
   fluidRow(column(
-    4,
-    h3("Tolerance"),
-    br(),
-    sliderInput(
-      'tolerance_value',
-      h4('Select the tolerance value'),
-      min = -12,
-      max = -2,
-      value = -9
-    ),
-    br(),
+    12,
+    uiOutput('fixedpoint_solution'),
+    uiOutput('fixedpoint_plot')
   )),
   fluidRow(column(
-    8,
-    h3("Output"),
-    br(),
-    htmlOutput("root_method_solution"),
-    actionButton("calculate_button", "Calculate")
-  
-    
-  )),
+    12,
+    actionButton("fixedpoint_calculate_button", "Calculate")
+  ))
   
 )
-
-
