@@ -3,7 +3,8 @@ shinyjs::onclick("bisection_plot_render",
 
 bisection_reactive_values <- reactiveValues(func = "",
                                             status = F,
-                                            root = NA)
+                                            root = NA,
+                                            error = F)
 
 bisection_wait_for_button_click <-
   eventReactive(input$bisection_calculate_button, {

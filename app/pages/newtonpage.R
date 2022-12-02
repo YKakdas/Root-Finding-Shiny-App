@@ -36,8 +36,9 @@ newton_page <- fluidPage(
   )),
   fluidRow(column(
     12,
-    offset = 5,
-    create_action_button_for_calculation('newton_calculate_button')
+    offset = 4,
+    create_action_button_for_calculation('newton_calculate_button'),
+    create_action_button_for_reset('newton_reset_button')
   ))
   
 )

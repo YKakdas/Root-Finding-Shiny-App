@@ -3,11 +3,12 @@ shinyjs::onclick("newton_plot_render",
 
 newton_reactive_values <- reactiveValues(func = "",
                                          status = F,
-                                         root = NA)
+                                         root = NA,
+                                         error = F)
 
 newton_wait_for_button_click <-
   eventReactive(input$newton_calculate_button, {
-    # No action needed. Just used as a callback
+    newton_reactive_values$error <- F
   })
 
 newton_solution <-
@@ -26,9 +27,25 @@ newton_solution <-
     )
   )
 
+observeEvent(input$newton_reset_button, {
+  shinyjs::reset("newton_text_function")
+  shinyjs::reset("newton_init_value")
+  shinyjs::reset("newton_max_iter_value")
+  shinyjs::reset("newton_tolerance_value")
+  shinyjs::hide("newton_solution_table")
+  shinyjs::hide("newton_plot_render")
+  
+  newton_reactive_values <- reactiveValues(
+    func = "",
+    status = F,
+    root = NA,
+    error = F
+  )
+  
+})
 
 output$newton_solution_table <-
-  render_table(newton_solution)
+  render_table(newton_solution,newton_reactive_values)
 
 output$newton_solution <-
   output_root_finding_solution(newton_wait_for_button_click,

@@ -1,5 +1,14 @@
 list.of.packages <-
-  c("shiny", "shinyjs", "shinydashboard", "spuRs", "systemfonts", "shinyBS")
+  c(
+    "shiny",
+    "shinyjs",
+    "shinydashboard",
+    "spuRs",
+    "systemfonts",
+    "shinyBS",
+    "shinyalert"
+  )
+
 new.packages <-
   list.of.packages[!(list.of.packages %in% installed.packages()[, "Package"])]
 if (length(new.packages))
@@ -10,9 +19,10 @@ library(shinyjs)
 library(shinydashboard)
 library(spuRs)
 library(shinyBS)
+library(shinyalert)
 
-source("server_util.R")
-source("ui_util.R")
+source("util/server_util.R")
+source("util/ui_util.R")
 
 source("jsHelper/fixedpoint_js_helper.R")
 source("jsHelper/bisection_js_helper.R")

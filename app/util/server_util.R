@@ -8,7 +8,6 @@ createTableSuccess <- function(result) {
   )
   df$error <- format(df$error, scientific = TRUE)
   df
-  print(df)
 }
 
 createTableFailure <- function(result) {
@@ -28,54 +27,66 @@ calculate_root_finding <-
            params,
            values,
            is_newton = F) {
-    if (is_newton) {
-      ftn <- function(x) {
-        exp <- parse(text = as.character(input_func))
-        fx <- eval(exp)
-        
-        first_derivative <- D(exp, "x")
-        fdx <- eval(first_derivative)
-        
-        return(c(fx, fdx))
+    tryCatch({
+      if (is_newton) {
+        ftn <- function(x) {
+          exp <- parse(text = as.character(input_func))
+          fx <- eval(exp)
+          
+          first_derivative <- D(exp, "x")
+          fdx <- eval(first_derivative)
+          
+          return(c(fx, fdx))
+        }
+      } else{
+        ftn <- function(x) {
+          exp <- parse(text = as.character(input_func))
+          return(eval(exp))
+        }
       }
-    } else{
-      ftn <- function(x) {
-        exp <- parse(text = as.character(input_func))
-        return(eval(exp))
+      
+      fun_result <-
+        root_finding_method(ftn, params)
+      if (fun_result$status == "SUCCESS") {
+        values$func <- as.character(input_func)
+        values$status <- T
+      } else{
+        values$status <- F
       }
-    }
+      values$root <- fun_result$root
+      values$error <- F
+      fun_result
+    }, error = function(error_message) {
+      shinyalert("Oops!", "Something went wrong.", type = "error")
+      values$error <- T
+    })
     
-    fun_result <-
-      root_finding_method(ftn, params)
-    if (fun_result$status == "SUCCESS") {
-      values$func <- as.character(input_func)
-      values$status <- T
-    } else{
-      values$status <- F
-    }
-    values$root <- fun_result$root
-    fun_result
   }
 
 
-render_table <- function(solution) {
+render_table <- function(solution, values) {
   renderTable(digits = 10,
               rownames = TRUE,
               colnames = FALSE,
               {
                 result <- solution()
-                if (result$status == "SUCCESS") {
-                  df <- createTableSuccess(result)
-                  df <- t(df)
-                  rownames(df) <-
-                    c("STATUS", "ROOT", "NUMBER OF ITERATION", "ABSOLUTE ERROR")
-                } else{
-                  df <- createTableFailure(result)
-                  df <- t(df)
-                  rownames(df) <-
-                    c("STATUS", "MAX NUMBER OF ITERATION", "TOLERANCE")
+                if (!is.null(result) && !values$error) {
+                  if (result$status == "SUCCESS") {
+                    df <- createTableSuccess(result)
+                    df <- t(df)
+                    rownames(df) <-
+                      c("STATUS",
+                        "ROOT",
+                        "NUMBER OF ITERATION",
+                        "ABSOLUTE ERROR")
+                  } else{
+                    df <- createTableFailure(result)
+                    df <- t(df)
+                    rownames(df) <-
+                      c("STATUS", "MAX NUMBER OF ITERATION", "TOLERANCE")
+                  }
+                  df
                 }
-                df
               })
 }
 
@@ -88,19 +99,21 @@ output_root_finding_solution <-
         status <- "danger"
       }
       
-      box(
-        title = "Result",
-        width = 6,
-        height = "50%",
-        solidHeader = TRUE,
-        status = status,
-        tableOutput(table_id)
-      )
+      if (!values$error) {
+        box(
+          title = "Result",
+          width = 6,
+          height = "50%",
+          solidHeader = TRUE,
+          status = status,
+          tableOutput(table_id)
+        )
+      }
     })
   }
 
 create_plot <- function(values) {
-  if (values$status) {
+  if (values$status && !values$error) {
     ftn <- function(x) {
       exp <- parse(text = values$func)
       return(eval(exp))
@@ -118,7 +131,7 @@ render_plot <- function(values) {
 output_plot <- function(wait_func, values, plot_id) {
   renderUI({
     wait_func()
-    if (values$status) {
+    if (values$status && !values$error) {
       box(
         title = "Plot",
         width = 6,

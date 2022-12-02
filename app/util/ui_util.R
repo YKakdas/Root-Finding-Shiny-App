@@ -85,6 +85,10 @@ create_action_button_for_calculation <- function(button_id) {
   actionButton(button_id, "Calculate")
 }
 
+create_action_button_for_reset <- function(button_id) {
+  actionButton(button_id, "Reset")
+}
+
 create_popup_window <-
   function(modal_id,
            plot_id,

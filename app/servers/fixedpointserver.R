@@ -1,13 +1,16 @@
 shinyjs::onclick("fixedpoint_plot_render",
                  pop_up_plot(session, "fixedpoint_popup"))
 
-fixedpoint_reactive_values <- reactiveValues(func = "",
-                                             status = F,
-                                             root = NA)
+fixedpoint_reactive_values <- reactiveValues(
+  func = "",
+  status = F,
+  root = NA,
+  error = F
+)
 
 fixedpoint_wait_for_button_click <-
   eventReactive(input$fixedpoint_calculate_button, {
-    # No action needed. Just used as a callback
+    fixedpoint_reactive_values$error <- F
   })
 
 fixedpoint_solution <-
@@ -23,11 +26,30 @@ fixedpoint_solution <-
       ),
       fixedpoint_reactive_values
     )
+    
   )
+
+observeEvent(input$fixedpoint_reset_button, {
+  shinyjs::reset("fixedpoint_text_function")
+  shinyjs::reset("fixedpoint_init_value")
+  shinyjs::reset("fixedpoint_max_iter_value")
+  shinyjs::reset("fixedpoint_tolerance_value")
+  shinyjs::hide("fixedpoint_solution_table")
+  shinyjs::hide("fixedpoint_plot_render")
+  
+  fixedpoint_reactive_values <- reactiveValues(
+    func = "",
+    status = F,
+    root = NA,
+    error = F
+  )
+  
+  
+})
 
 
 output$fixedpoint_solution_table <-
-  render_table(fixedpoint_solution)
+  render_table(fixedpoint_solution, fixedpoint_reactive_values)
 
 output$fixedpoint_solution <-
   output_root_finding_solution(
