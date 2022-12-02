@@ -6,9 +6,11 @@ fixed_point_page <- fluidPage(
     'fixedpoint_download_plot',
     'Fixedpoint'
   ),
-  tags$head(tags$script(HTML(JS.logify))),
   tags$head(tags$script(HTML(
-    load_slider_js_helper('fixedpoint_tolerance_value')
+    fixedpoint_js_logify
+  ))),
+  tags$head(tags$script(HTML(
+    fixedpoint_js_onload
   ))),
   # Application title
   titlePanel("FixedPoint Algorithm"),

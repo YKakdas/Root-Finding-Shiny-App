@@ -128,3 +128,7 @@ get_download_handler <- function(filename, values) {
     }
   )
 }
+
+pop_up_plot <- function(session, modal_id) {
+  toggleModal(session, modal_id, toggle = "open")
+}

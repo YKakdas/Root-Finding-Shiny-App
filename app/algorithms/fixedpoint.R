@@ -22,7 +22,7 @@ fixedpoint <- function (ftn, params)
       return(list(
         status = "SUCCESS",
         root = xnew,
-        iterationr = iter,
+        iteration = iter,
         tolerance = xnew - xold
       ))
     }

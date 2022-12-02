@@ -14,6 +14,9 @@ library(shinyBS)
 source("server_util.R")
 source("ui_util.R")
 
+source("jsHelper/fixedpoint_js_helper.R")
+source("jsHelper/bisection_js_helper.R")
+
 server <- function(input, output, session) {
   source('servers/fixedpointserver.R', local = TRUE)
   source('servers/bisectionserver.R', local = TRUE)
