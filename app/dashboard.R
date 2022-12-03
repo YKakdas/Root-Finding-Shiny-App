@@ -1,4 +1,6 @@
-sidebar <- dashboardSidebar(sidebarMenu(
+sidebar <- dashboardSidebar(
+  tags$style(HTML(".sidebar-menu li a { font-size: 14px; }")),
+  sidebarMenu(
   id = "tabs",
   menuItem("Home", tabName = "home", icon = icon("home")),
   menuItem(

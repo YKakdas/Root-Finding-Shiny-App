@@ -12,9 +12,12 @@ newton_page <- fluidPage(
   tags$head(tags$script(HTML(
     newton_js_onload
   ))),
-  # Application title
-  titlePanel("Newton Algorithm"),
-  
+  fluidRow(
+    column(
+      12,
+      create_box_for_html("newton_html","html/newton.html")
+    )
+  ),
   fluidRow(
     column(
       12,

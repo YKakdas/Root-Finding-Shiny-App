@@ -14,7 +14,7 @@ fixedpoint <- function (ftn, params)
       return(list(
         status = "FAIL",
         root = NA,
-        iteration = max.iter,
+        iteration = iter,
         tolerance = tol
       ))
     }

@@ -103,3 +103,16 @@ create_popup_window <-
       downloadButton(download_button_id, 'Download')
     ))
   }
+
+create_box_for_html <- function(id, path) {
+  box(
+    id = id,
+    title = "Info",
+    width = 12,
+    height = "50%",
+    solidHeader = TRUE,
+    status = "warning",
+    includeHTML(path),
+    collapsible = T
+  )
+}

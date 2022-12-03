@@ -16,7 +16,7 @@ bisection <- function(ftn, params) {
       return(list(
         status = "FAIL",
         root = NA,
-        iteration = max.iter,
+        iteration = iter,
         tolerance = tol
       ))
     }
@@ -41,14 +41,14 @@ bisection <- function(ftn, params) {
       return(list(
         status = "FAIL",
         root = NA,
-        iteration = max.iter,
+        iteration = iter,
         tolerance = tol
       ))
     }
     
     # successively refine a and b
     n <- 0
-    while ((b - a) > tol && (iter < max.iter)) {
+    while ((b - a) > tol) {
       x.m <- (a + b) / 2
       f.m <- ftn(x.m)
       if (f.m == 0) {

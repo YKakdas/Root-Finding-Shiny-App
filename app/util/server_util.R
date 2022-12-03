@@ -83,7 +83,7 @@ render_table <- function(solution, values) {
                     df <- createTableFailure(result)
                     df <- t(df)
                     rownames(df) <-
-                      c("STATUS", "MAX NUMBER OF ITERATION", "TOLERANCE")
+                      c("STATUS", "NUMBER OF ITERATION", "TOLERANCE")
                   }
                   df
                 }
@@ -106,6 +106,7 @@ output_root_finding_solution <-
           height = "50%",
           solidHeader = TRUE,
           status = status,
+          collapsible = T,
           tableOutput(table_id)
         )
       }
@@ -138,6 +139,7 @@ output_plot <- function(wait_func, values, plot_id) {
         height = "50%",
         solidHeader = TRUE,
         status = "success",
+        collapsible = T,
         plotOutput(plot_id, height = "205")
       )
     }

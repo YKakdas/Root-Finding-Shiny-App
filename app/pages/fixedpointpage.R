@@ -12,9 +12,12 @@ fixed_point_page <- fluidPage(
   tags$head(tags$script(HTML(
     fixedpoint_js_onload
   ))),
-  # Application title
-  titlePanel("FixedPoint Algorithm"),
-  
+  fluidRow(
+    column(
+      12,
+      create_box_for_html("fixedpoint_html","html/fixedpoint.html")
+    )
+  ),
   fluidRow(
     column(
       12,
