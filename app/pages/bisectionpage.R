@@ -12,9 +12,12 @@ bisection_page <- fluidPage(
   tags$head(tags$script(HTML(
     bisection_js_onload
   ))),
-  # Application title
-  titlePanel("Bisection Algorithm"),
-  
+  fluidRow(
+    column(
+      12,
+      create_box_for_html("bisection_html","html/bisection.html")
+    )
+  ),
   fluidRow(
     column(
       12,
