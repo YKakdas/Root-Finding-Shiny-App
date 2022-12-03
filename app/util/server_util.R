@@ -26,7 +26,8 @@ calculate_root_finding <-
            root_finding_method,
            params,
            values,
-           is_newton = F) {
+           is_newton = F,
+           is_halley = F) {
     tryCatch({
       if (is_newton) {
         ftn <- function(x) {
@@ -37,6 +38,19 @@ calculate_root_finding <-
           fdx <- eval(first_derivative)
           
           return(c(fx, fdx))
+        }
+      } else if (is_halley) {
+        ftn <- function(x) {
+          exp <- parse(text = as.character(input_func))
+          fx <- eval(exp)
+          
+          first_derivative <- D(exp, "x")
+          fdx <- eval(first_derivative)
+          
+          second_derivative <- D(first_derivative, "x")
+          fddx  <- eval(second_derivative)
+          
+          return(c(fx, fdx, fddx))
         }
       } else{
         ftn <- function(x) {
@@ -57,7 +71,11 @@ calculate_root_finding <-
       values$error <- F
       fun_result
     }, error = function(error_message) {
-      shinyalert("Oops!", paste("Something went wrong.", error_message), type = "error")
+      shinyalert(
+        "Oops!",
+        "Something went wrong. Please ensure that you've entered both function and the initial value in correct format",
+        type = "error"
+      )
       values$error <- T
     })
     

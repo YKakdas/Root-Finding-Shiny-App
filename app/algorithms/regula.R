@@ -65,7 +65,6 @@ regula <- function(ftn, params) {
       }
       n <- n + 1
       iter <- iter + 1
-      print(iter)
     }
     
     # return (approximate) root

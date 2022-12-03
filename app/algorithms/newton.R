@@ -28,7 +28,7 @@ newton <- function(ftn, params) {
         status = "SUCCESS",
         root = x,
         iteration = iter,
-        tolerance = fx[1]
+        tolerance = abs(fx[1])
       ))
     }
   })

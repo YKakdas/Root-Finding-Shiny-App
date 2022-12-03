@@ -1,39 +1,47 @@
 halley_page <- fluidPage(
-  # Application title
-  titlePanel("Halley Algorithm"),
-  br(),
-  
+  useShinyjs(),
+  create_popup_window(
+    'halley_popup',
+    'halley_popup_plot',
+    'halley_download_plot',
+    'Halley'
+  ),
+  tags$head(tags$script(HTML(
+    halley_js_logify
+  ))),
+  tags$head(tags$script(HTML(
+    halley_js_onload
+  ))),
+  fluidRow(
+    column(
+      12,
+      create_box_for_html("halley_html","html/halley.html")
+    )
+  ),
+  fluidRow(
+    column(
+      12,
+      create_box_for_function_text('halley_text_function',173),
+      create_box_for_single_initial_value('halley_init_value')
+    )
+  ),
+  fluidRow(
+    column(
+      12,
+      create_box_for_max_iter('halley_max_iter_value'),
+      create_box_for_tolerance('halley_tolerance_value')
+    )
+  ),
   fluidRow(column(
-    4,
-    br(),
-    textInput(
-      "text_function_halley",
-      h3("Function Input(x)"),
-      placeholder = "Enter function..."
-    ),
-    br()
+    12,
+    uiOutput('halley_solution'),
+    uiOutput('halley_plot')
   )),
   fluidRow(column(
-    4,
-    h3("Initial value"),
-    br(),
-    sliderInput(
-      'init_value_halley',
-      h4('Select the initial value'),
-      min = 1,
-      max = 120,
-      value = 1,
-      step = 1,
-      round = 0
-    ),
-    br(),
-    br(),
-  )),
-  fluidRow(column(
-    8,
-    h3("Output"),
-    br(),
-    htmlOutput("root_method_solution_halley"),
-    actionButton("calculate_button_halley", "Calculate")
+    12,
+    offset = 4,
+    create_action_button_for_calculation('halley_calculate_button'),
+    create_action_button_for_reset('halley_reset_button')
   ))
+  
 )

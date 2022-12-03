@@ -4,7 +4,7 @@ secant_page <- fluidPage(
     'secant_popup',
     'secant_popup_plot',
     'secant_download_plot',
-    'secant'
+    'Secant'
   ),
   tags$head(tags$script(HTML(secant_js_logify))),
   tags$head(tags$script(HTML(secant_js_onload))),
