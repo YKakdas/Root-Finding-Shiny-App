@@ -12,9 +12,12 @@ regula_page <- fluidPage(
   tags$head(tags$script(HTML(
     regula_js_onload
   ))),
-  # Application title
-  titlePanel("Regula Algorithm"),
-  
+  fluidRow(
+    column(
+      12,
+      create_box_for_html("regula_html","html/regula.html")
+    )
+  ),
   fluidRow(
     column(
       12,

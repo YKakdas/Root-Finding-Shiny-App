@@ -48,7 +48,7 @@ bisection <- function(ftn, params) {
     
     # successively refine a and b
     n <- 0
-    while ((b - a) > tol) {
+    while ((b - a) > tol && (iter < max.iter)) {
       x.m <- (a + b) / 2
       f.m <- ftn(x.m)
       if (f.m == 0) {

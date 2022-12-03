@@ -22,6 +22,7 @@ bisection_solution <-
       c(
         a = as.numeric(input$bisection_init_value_start),
         b = as.numeric(input$bisection_init_value_end),
+        max.iter = input$bisection_max_iter_value,
         tol = 10 ^ input$bisection_tolerance_value
       ),
       bisection_reactive_values

@@ -27,8 +27,8 @@ bisection_page <- fluidPage(
   ),
   fluidRow(
     column(
-      offset = 3,
       12,
+      create_box_for_max_iter('bisection_max_iter_value'),
       create_box_for_tolerance('bisection_tolerance_value')
     )
   ),

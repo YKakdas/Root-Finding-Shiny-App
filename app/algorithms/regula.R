@@ -15,7 +15,7 @@ regula <- function(ftn, params) {
       return(list(
         status = "FAIL",
         root = NA,
-        iteration = max.iter,
+        iteration = iter,
         tolerance = tol
       ))
     }
@@ -39,7 +39,7 @@ regula <- function(ftn, params) {
       return(list(
         status = "FAIL",
         root = NA,
-        iteration = max.iter,
+        iteration = iter,
         tolerance = tol
       ))
     }
@@ -65,6 +65,7 @@ regula <- function(ftn, params) {
       }
       n <- n + 1
       iter <- iter + 1
+      print(iter)
     }
     
     # return (approximate) root
