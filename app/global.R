@@ -28,6 +28,7 @@ source("jsHelper/fixedpoint_js_helper.R")
 source("jsHelper/bisection_js_helper.R")
 source("jsHelper/regula_js_helper.R")
 source("jsHelper/newton_js_helper.R")
+source("jsHelper/secant_js_helper.R")
 
 server <- function(input, output, session) {
   source('servers/fixedpointserver.R', local = TRUE)

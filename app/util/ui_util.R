@@ -24,7 +24,12 @@ create_box_for_single_initial_value <- function(text_input_id) {
 }
 
 create_box_for_multiple_initial_values <-
-  function(start_text_input_id, end_text_input_id) {
+  function(start_text_input_id,
+           end_text_input_id,
+           first_title = "Initial interval start value",
+           first_placeholder = "Enter start...",
+           second_title = "Initial interval end value",
+           second_placeholder = "Enter end...") {
     box(
       title = "Initial Values",
       width = 6,
@@ -33,13 +38,13 @@ create_box_for_multiple_initial_values <-
       status = "primary",
       textInput(
         start_text_input_id,
-        h4("Initial interval start value"),
-        placeholder = "Enter start..."
+        h4(first_title),
+        placeholder = first_placeholder
       ),
       textInput(
         end_text_input_id,
-        h4("Initial interval end value"),
-        placeholder = "Enter end..."
+        h4(second_title),
+        placeholder = second_placeholder
       )
       
     )

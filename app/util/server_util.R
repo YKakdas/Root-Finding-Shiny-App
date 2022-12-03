@@ -57,7 +57,7 @@ calculate_root_finding <-
       values$error <- F
       fun_result
     }, error = function(error_message) {
-      shinyalert("Oops!", "Something went wrong.", type = "error")
+      shinyalert("Oops!", paste("Something went wrong.", error_message), type = "error")
       values$error <- T
     })
     
