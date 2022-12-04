@@ -1,47 +1,8 @@
-halley_page <- fluidPage(
-  useShinyjs(),
-  create_popup_window(
-    'halley_popup',
-    'halley_popup_plot',
-    'halley_download_plot',
-    'Halley'
-  ),
-  tags$head(tags$script(HTML(halley_js_logify))),
-  tags$head(tags$script(HTML(halley_js_onload))),
-  fluidRow(column(
-    12,
-    create_box_for_html("halley_html", "html/halley.html")
-  )),
-  fluidRow(
-    column(
-      12,
-      create_box_for_function_text('halley_text_function', 173),
-      create_box_for_single_initial_value('halley_init_value')
-    )
-  ),
-  fluidRow(
-    column(
-      12,
-      create_box_for_max_iter('halley_max_iter_value'),
-      create_box_for_tolerance('halley_tolerance_value')
-    )
-  ),
-  fluidRow(column(
-    12,
-    uiOutput('halley_solution'),
-    uiOutput('halley_plot')
-  )),
-  fluidRow(
-    column(
-      6,
-      create_action_button_for_calculation('halley_calculate_button'),
-      align = "right"
-    ),
-    column(
-      6,
-      create_action_button_for_reset('halley_reset_button'),
-      align = "left"
-    )
-  )
-  
-)
+halley_page <-
+  create_page(populate_id(
+    "halley",
+    173,
+    T,
+    halley_js_logify,
+    halley_js_onload
+  ))

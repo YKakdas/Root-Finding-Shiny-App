@@ -58,7 +58,6 @@ calculate_root_finding <-
           return(eval(exp))
         }
       }
-      
       fun_result <-
         root_finding_method(ftn, params)
       if (fun_result$status == "SUCCESS") {
@@ -120,7 +119,7 @@ output_root_finding_solution <-
       if (!values$error) {
         box(
           title = "Result",
-          width = 6,
+          width = 12,
           height = "267px",
           solidHeader = TRUE,
           status = status,
@@ -156,7 +155,7 @@ output_plot <- function(wait_func, values, plot_id) {
     if (values$status && !values$error) {
       box(
         title = "Plot",
-        width = 6,
+        width = 12,
         height = "50%",
         solidHeader = TRUE,
         status = "success",
