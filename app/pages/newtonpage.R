@@ -6,22 +6,16 @@ newton_page <- fluidPage(
     'newton_download_plot',
     'Newton'
   ),
-  tags$head(tags$script(HTML(
-    newton_js_logify
-  ))),
-  tags$head(tags$script(HTML(
-    newton_js_onload
-  ))),
+  tags$head(tags$script(HTML(newton_js_logify))),
+  tags$head(tags$script(HTML(newton_js_onload))),
+  fluidRow(column(
+    12,
+    create_box_for_html("newton_html", "html/newton.html")
+  )),
   fluidRow(
     column(
       12,
-      create_box_for_html("newton_html","html/newton.html")
-    )
-  ),
-  fluidRow(
-    column(
-      12,
-      create_box_for_function_text('newton_text_function',173),
+      create_box_for_function_text('newton_text_function', 173),
       create_box_for_single_initial_value('newton_init_value')
     )
   ),
@@ -37,11 +31,16 @@ newton_page <- fluidPage(
     uiOutput('newton_solution'),
     uiOutput('newton_plot')
   )),
-  fluidRow(column(
-    12,
-    offset = 4,
-    create_action_button_for_calculation('newton_calculate_button'),
-    create_action_button_for_reset('newton_reset_button')
-  ))
-  
+  fluidRow(
+    column(
+      6,
+      create_action_button_for_calculation('newton_calculate_button'),
+      align = "right"
+    ),
+    column(
+      6,
+      create_action_button_for_reset('newton_reset_button'),
+      align = "left"
+    )
+  )
 )

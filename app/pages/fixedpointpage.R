@@ -12,12 +12,10 @@ fixed_point_page <- fluidPage(
   tags$head(tags$script(HTML(
     fixedpoint_js_onload
   ))),
-  fluidRow(
-    column(
-      12,
-      create_box_for_html("fixedpoint_html","html/fixedpoint.html")
-    )
-  ),
+  fluidRow(column(
+    12,
+    create_box_for_html("fixedpoint_html", "html/fixedpoint.html")
+  )),
   fluidRow(
     column(
       12,
@@ -39,10 +37,14 @@ fixed_point_page <- fluidPage(
   )),
   fluidRow(
     column(
-      12,
-      offset = 4,
+      6,
       create_action_button_for_calculation('fixedpoint_calculate_button'),
-      create_action_button_for_reset('fixedpoint_reset_button')
+      align = "right"
+    ),
+    column(
+      6,
+      create_action_button_for_reset('fixedpoint_reset_button'),
+      align = "left"
     )
   )
   

@@ -6,22 +6,16 @@ halley_page <- fluidPage(
     'halley_download_plot',
     'Halley'
   ),
-  tags$head(tags$script(HTML(
-    halley_js_logify
-  ))),
-  tags$head(tags$script(HTML(
-    halley_js_onload
-  ))),
+  tags$head(tags$script(HTML(halley_js_logify))),
+  tags$head(tags$script(HTML(halley_js_onload))),
+  fluidRow(column(
+    12,
+    create_box_for_html("halley_html", "html/halley.html")
+  )),
   fluidRow(
     column(
       12,
-      create_box_for_html("halley_html","html/halley.html")
-    )
-  ),
-  fluidRow(
-    column(
-      12,
-      create_box_for_function_text('halley_text_function',173),
+      create_box_for_function_text('halley_text_function', 173),
       create_box_for_single_initial_value('halley_init_value')
     )
   ),
@@ -37,11 +31,17 @@ halley_page <- fluidPage(
     uiOutput('halley_solution'),
     uiOutput('halley_plot')
   )),
-  fluidRow(column(
-    12,
-    offset = 4,
-    create_action_button_for_calculation('halley_calculate_button'),
-    create_action_button_for_reset('halley_reset_button')
-  ))
+  fluidRow(
+    column(
+      6,
+      create_action_button_for_calculation('halley_calculate_button'),
+      align = "right"
+    ),
+    column(
+      6,
+      create_action_button_for_reset('halley_reset_button'),
+      align = "left"
+    )
+  )
   
 )

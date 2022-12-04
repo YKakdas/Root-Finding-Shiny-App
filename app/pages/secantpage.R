@@ -40,10 +40,14 @@ secant_page <- fluidPage(
   )),
   fluidRow(
     column(
-      12,
-      offset = 4,
+      6,
       create_action_button_for_calculation('secant_calculate_button'),
-      create_action_button_for_reset('secant_reset_button')
+      align = "right"
+    ),
+    column(
+      6,
+      create_action_button_for_reset('secant_reset_button'),
+      align = "left"
     )
   )
   

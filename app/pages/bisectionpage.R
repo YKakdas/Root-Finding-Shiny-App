@@ -12,16 +12,14 @@ bisection_page <- fluidPage(
   tags$head(tags$script(HTML(
     bisection_js_onload
   ))),
+  fluidRow(column(
+    12,
+    create_box_for_html("bisection_html", "html/bisection.html")
+  )),
   fluidRow(
     column(
       12,
-      create_box_for_html("bisection_html","html/bisection.html")
-    )
-  ),
-  fluidRow(
-    column(
-      12,
-      create_box_for_function_text('bisection_text_function',249),
+      create_box_for_function_text('bisection_text_function', 249),
       create_box_for_multiple_initial_values('bisection_init_value_start', 'bisection_init_value_end')
     )
   ),
@@ -37,11 +35,17 @@ bisection_page <- fluidPage(
     uiOutput('bisection_solution'),
     uiOutput('bisection_plot')
   )),
-  fluidRow(column(
-    12,
-    offset = 4,
-    create_action_button_for_calculation('bisection_calculate_button'),
-    create_action_button_for_reset('bisection_reset_button')
-  ))
+  fluidRow(
+    column(
+      6,
+      create_action_button_for_calculation('bisection_calculate_button'),
+      align = "right"
+    ),
+    column(
+      6,
+      create_action_button_for_reset('bisection_reset_button'),
+      align = "left"
+    )
+  )
   
 )

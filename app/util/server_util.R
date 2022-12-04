@@ -121,7 +121,7 @@ output_root_finding_solution <-
         box(
           title = "Result",
           width = 6,
-          height = "50%",
+          height = "267px",
           solidHeader = TRUE,
           status = status,
           collapsible = T,

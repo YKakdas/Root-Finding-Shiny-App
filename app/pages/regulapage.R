@@ -6,22 +6,16 @@ regula_page <- fluidPage(
     'regula_download_plot',
     'Regula'
   ),
-  tags$head(tags$script(HTML(
-    regula_js_logify
-  ))),
-  tags$head(tags$script(HTML(
-    regula_js_onload
-  ))),
+  tags$head(tags$script(HTML(regula_js_logify))),
+  tags$head(tags$script(HTML(regula_js_onload))),
+  fluidRow(column(
+    12,
+    create_box_for_html("regula_html", "html/regula.html")
+  )),
   fluidRow(
     column(
       12,
-      create_box_for_html("regula_html","html/regula.html")
-    )
-  ),
-  fluidRow(
-    column(
-      12,
-      create_box_for_function_text('regula_text_function',249),
+      create_box_for_function_text('regula_text_function', 249),
       create_box_for_multiple_initial_values('regula_init_value_start', 'regula_init_value_end')
     )
   ),
@@ -37,11 +31,17 @@ regula_page <- fluidPage(
     uiOutput('regula_solution'),
     uiOutput('regula_plot')
   )),
-  fluidRow(column(
-    12,
-    offset = 4,
-    create_action_button_for_calculation('regula_calculate_button'),
-    create_action_button_for_reset('regula_reset_button')
-  ))
+  fluidRow(
+    column(
+      6,
+      create_action_button_for_calculation('regula_calculate_button'),
+      align = "right"
+    ),
+    column(
+      6,
+      create_action_button_for_reset('regula_reset_button'),
+      align = "left"
+    )
+  )
   
 )
