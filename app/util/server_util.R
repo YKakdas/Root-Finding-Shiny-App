@@ -138,6 +138,9 @@ create_plot <- function(values) {
       return(eval(exp))
     }
     curve(ftn, values$root - 5, values$root + 5)
+    abline(h = 0, lty = 5)
+    abline(v = values$root, lty = 5)
+    points(values$root, 0, pch = 15)
   }
 }
 
