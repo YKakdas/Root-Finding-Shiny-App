@@ -3,7 +3,6 @@ list.of.packages <-
     "shiny",
     "shinyjs",
     "shinydashboard",
-    "spuRs",
     "systemfonts",
     "shinyBS",
     "shinyalert"
