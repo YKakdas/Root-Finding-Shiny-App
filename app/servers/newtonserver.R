@@ -31,7 +31,6 @@ observeEvent(input$newton_reset_button, {
   shinyjs::reset("newton_text_function")
   shinyjs::reset("newton_init_value")
   shinyjs::reset("newton_max_iter_value")
-  shinyjs::reset("newton_tolerance_value")
   shinyjs::hide("newton_solution_table")
   shinyjs::hide("newton_plot_render")
   

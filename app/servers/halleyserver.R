@@ -31,7 +31,6 @@ observeEvent(input$halley_reset_button, {
   shinyjs::reset("halley_text_function")
   shinyjs::reset("halley_init_value")
   shinyjs::reset("halley_max_iter_value")
-  shinyjs::reset("halley_tolerance_value")
   shinyjs::hide("halley_solution_table")
   shinyjs::hide("halley_plot_render")
   
